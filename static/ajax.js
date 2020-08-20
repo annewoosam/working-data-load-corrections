@@ -1,14 +1,14 @@
 "use strict";
 
-$('#get-user').on('submit', (evt) => {
+$('#get-correction').on('submit', (evt) => {
   evt.preventDefault();
 
-  const selectedId = $('#user-id').val();
+  const selectedId = $('#correction-id').val();
 
-  $.get(`/api/user/${selectedId}`, (res) => {
-    $('#username').html(res.username);
-    $('#email').html(res.email);
-    $('#usertype').html(res.usertype);
+  $.get(`/api/correction/${selectedId}`, (res) => {
+    $('#checklistid').html(res.checklistid);
+    $('#questionnumber').html(res.questionnumber);
+    $('#dateregistered').html(res.dateregistered);
   });
 });
 

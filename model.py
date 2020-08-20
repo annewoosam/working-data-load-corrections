@@ -4,32 +4,28 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-class User(db.Model):
-    """Data model for an animal."""
+class Correction(db.Model):
+    """Data model for a correction."""
 
-    __tablename__ = 'users'
+    __tablename__ = 'corrections'
 
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    email = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.Date(), nullable=False)
-    username = db.Column(db.String(), nullable=False)
-    usertype = db.Column(db.String(), nullable=False)
-
-    # user_id = db.Column(db.Integer,
-    #                      db.ForeignKey('templates.user_id'),
-    #                      nullable=False)
-    # Template = db.relationship('Template', backref='users')
-
+    correction_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    checklistid = db.Column(db.Integer, nullable=False)
+    questionnumber = db.Column(db.Integer, nullable=False)
+    role = db.Column(db.Boolean, nullable=False)
+    answer = db.Column(db.String(2), nullable=False)
+    dateregistered = db.Column(db.Date, nullable=False)
+ 
     def __repr__(self):
         """Provide helpful representation when printing."""
 
-        return f'<User user_id={self.user_id} email={self.email}> username={self.username} usertype={self.usertype}'
+        return f'<Correction correction_id={self.correction_id} checklistid={self.checklistid}> questionnumber={self.questionnumber}'
 
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///users'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///corrections'
     app.config['SQLALCHEMY_ECHO'] = False
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
